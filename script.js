@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
-import StorkMesh from './animals/stork';
+import {stork, leftWing, rightWing} from './animals/stork';
 
 // Sizes
 const sizes = {
@@ -14,7 +14,7 @@ scene.background = new THREE.Color('lightskyblue');
 
 // Camera
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100);
-camera.position.z = 6;
+camera.position.z = 5;
 camera.position.y = 2;
 scene.add(camera);
 
@@ -43,15 +43,9 @@ window.addEventListener('resize', () => {
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 });
 
-// Ground
-const geometry = new THREE.BoxGeometry( 3, 0.2, 3 );
-const material = new THREE.MeshBasicMaterial( { color: 'limegreen' } );
-const ground = new THREE.Mesh( geometry, material );
-scene.add( ground );
-
 // Add animals
-StorkMesh.position.y = 1.2;
-scene.add(StorkMesh);
+stork.position.y = 2;
+scene.add(stork);
 
 // Clock
 const clock = new THREE.Clock();
@@ -60,7 +54,9 @@ const clock = new THREE.Clock();
 function animate() {
   const elapsedTime = clock.getElapsedTime();
 
-  StorkMesh.position.y += Math.sin(elapsedTime) * 0.01;
+  stork.position.y -= Math.sin(elapsedTime) * 0.01;
+  rightWing.rotation.z += (Math.sin(elapsedTime) * 0.01) / 2;
+  leftWing.rotation.z -= (Math.sin(elapsedTime) * 0.01) / 2;
 
 	requestAnimationFrame( animate );
 	renderer.render( scene, camera );

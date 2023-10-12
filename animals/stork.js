@@ -56,13 +56,14 @@ const wingsGeometry = new THREE.BoxGeometry(wingsWidth, wingsHeight, wingsDepth)
 const wingsMaterial = new THREE.MeshBasicMaterial({ color: 'black' });
 
 const rightWing = new THREE.Mesh(wingsGeometry, wingsMaterial);
-rightWing.position.x = (bodySize / 2) + (wingsWidth / 2) - 0.1;
+rightWing.position.x = (bodySize / 2) + (wingsHeight / 2);
 rightWing.position.y -= wingsWidth / 4;
+rightWing.rotation.z = Math.PI / 2;
 rightWing.rotation.z = -(Math.PI / 4);
 stork.add(rightWing);
 
 const leftWing = new THREE.Mesh(wingsGeometry, wingsMaterial);
-leftWing.position.x = -(bodySize / 2) - (wingsWidth / 2) + 0.1;
+leftWing.position.x = -(bodySize / 2) - (wingsHeight / 2);
 leftWing.position.y -= wingsWidth / 4;
 leftWing.rotation.z = Math.PI / 4;
 stork.add(leftWing);
@@ -87,4 +88,4 @@ leftLeg.position.z -= legHeight / 2;
 leftLeg.rotation.x = Math.PI / 4;
 stork.add(leftLeg);
 
-export default stork;
+export { stork, leftWing, rightWing };
